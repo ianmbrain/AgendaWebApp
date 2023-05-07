@@ -17,8 +17,10 @@ namespace AgendaWebApp.Models
         /// </summary>
         public ImportanceEnum Importance { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime? FinishedDate { get; set; }
 
         public bool? Finished { get; set; }
