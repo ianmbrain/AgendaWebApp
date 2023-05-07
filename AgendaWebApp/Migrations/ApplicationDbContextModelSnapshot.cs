@@ -66,7 +66,7 @@ namespace AgendaWebApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TodoItemId")
+                    b.Property<int?>("TodoItemId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

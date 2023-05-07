@@ -1,0 +1,12 @@
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace AgendaWebApp.Controllers
+{
+    public class GroupModelController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}

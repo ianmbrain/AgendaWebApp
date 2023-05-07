@@ -30,7 +30,7 @@ namespace AgendaWebApp.Models
         /// Todo items associated with the group
         /// </summary>
         [ForeignKey("TodoItemModel")]
-        public int TodoItemId { get; set; }
+        public int? TodoItemId { get; set; }
         public ICollection<TodoItemModel> TodoItem { get; set; }
 
         /// <summary>

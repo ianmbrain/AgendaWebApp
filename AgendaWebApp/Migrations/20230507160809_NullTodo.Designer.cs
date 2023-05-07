@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaWebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230507152556_Initial")]
-    partial class Initial
+    [Migration("20230507160809_NullTodo")]
+    partial class NullTodo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,7 +69,7 @@ namespace AgendaWebApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TodoItemId")
+                    b.Property<int?>("TodoItemId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
