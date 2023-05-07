@@ -19,5 +19,12 @@ namespace AgendaWebApp.Controllers
             var items = _context.TodoItems.ToList();
             return View(items);
         }
+
+        public IActionResult Details(int id)
+        {
+            // Include "Include(a => a.GroupModelId)." after TodoItems if using join
+            TodoItemModel item = _context.TodoItems.FirstOrDefault(x => x.Id == id);
+            return View(item);
+        }
     }
 }
