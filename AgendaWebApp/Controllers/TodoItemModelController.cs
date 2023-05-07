@@ -1,29 +1,30 @@
 ﻿using AgendaWebApp.Data;
 using AgendaWebApp.Models;
+using AgendaWebApp.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaWebApp.Controllers
 {
     public class TodoItemModelController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ITodoItemModelRepository _context;
 
-        public TodoItemModelController(ApplicationDbContext context) 
+        public TodoItemModelController(ITodoItemModelRepository todoRepo) 
         {
-            _context = context;
+            _context = todoRepo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             // This is returning the list of the items in the TodoItems table.
-            var items = _context.TodoItems.ToList();
+            IEnumerable<TodoItemModel> items = await _context.GetAll();
             return View(items);
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             // Include "Include(a => a.GroupModelId)." after TodoItems if using join
-            TodoItemModel item = _context.TodoItems.FirstOrDefault(x => x.Id == id);
+            TodoItemModel item = await _context.GetByIdAsync(id);
             return View(item);
         }
     }

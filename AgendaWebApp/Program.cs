@@ -1,4 +1,5 @@
 using AgendaWebApp.Data;
+using AgendaWebApp.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<ITodoItemModelRepository, TodoItemModelRepository>();
 
 var app = builder.Build();
 

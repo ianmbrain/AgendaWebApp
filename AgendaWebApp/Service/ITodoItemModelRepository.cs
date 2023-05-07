@@ -1,4 +1,5 @@
-﻿using AgendaWebApp.Models;
+﻿using AgendaWebApp.Data.Enum;
+using AgendaWebApp.Models;
 
 namespace AgendaWebApp.Service
 {
@@ -6,7 +7,7 @@ namespace AgendaWebApp.Service
     {
         Task<IEnumerable<TodoItemModel>> GetAll();
         Task<TodoItemModel> GetByIdAsync(int id);
-        Task<IEnumerable<TodoItemModel>> GetItemByImportance(String importance);
+        Task<IEnumerable<TodoItemModel>> GetItemByImportance(ImportanceEnum importance);
         bool Add(TodoItemModel item);
         bool Delete(TodoItemModel item);
         bool Save();
