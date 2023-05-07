@@ -23,6 +23,5 @@ namespace AgendaWebApp.Models
 
         public bool? Finished { get; set; }
 
-        public ICollection<GroupModel> Groups { get; set; }
     }
 }
