@@ -5,13 +5,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form method="post" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -24,8 +19,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Importance" class="control-label"></label>
-                <select asp-for="Importance" asp-items="@Html.GetEnumSelectList<ImportanceEnum>()">
-                    <option selected="selected" value="">Please select</option>
+                <select asp-for="Importance" asp-items="@Html.GetEnumSelectList<ImportanceEnum>()" class="form-control">
+                        <option selected="selected" value="">Please select</option>
                 </select>
                 <span asp-validation-for="Importance" class="text-danger"></span>
             </div>
@@ -38,16 +33,6 @@
                 <label asp-for="FinishedDate" class="control-label"></label>
                 <input asp-for="FinishedDate" class="form-control" />
                 <span asp-validation-for="FinishedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Finished" class="control-label"></label>
-                <input asp-for="Finished" class="form-control" />
-                <span asp-validation-for="Finished" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GroupModelId" class="control-label"></label>
-                <input asp-for="GroupModelId" class="form-control" />
-                <span asp-validation-for="GroupModelId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

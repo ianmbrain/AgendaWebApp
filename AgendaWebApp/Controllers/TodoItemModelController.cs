@@ -32,5 +32,19 @@ namespace AgendaWebApp.Controllers
         {
             return View(); 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(TodoItemModel item)
+        {
+            // If the input is not valid the view will remain with validation text
+            if(!ModelState.IsValid)
+            {
+                return View(item);
+            }
+
+            _context.Add(item);
+            return RedirectToAction("Index");
+        }
+
     }
 }
