@@ -1,5 +1,6 @@
 ﻿using AgendaWebApp.Data.Enum;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgendaWebApp.Models
 {
@@ -24,6 +25,9 @@ namespace AgendaWebApp.Models
         public DateTime? FinishedDate { get; set; }
 
         public bool? Finished { get; set; }
+
+        [ForeignKey("GroupModel")]
+        public int? GroupModelId { get; set; }
 
     }
 }
