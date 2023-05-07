@@ -1,6 +1,12 @@
 ﻿using AgendaWebApp.Data.Enum;
+using AgendaWebApp.Migrations;
+using Microsoft.AspNetCore.Http.HttpResults;
+using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Runtime.Intrinsics.X86;
 
 namespace AgendaWebApp.Models
 {
@@ -22,15 +28,32 @@ namespace AgendaWebApp.Models
         public ImportanceEnum Importance { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; set; } = DateTime.Now;
 
-        [DataType(DataType.Date)]
+        [Required, DataType(DataType.Date)]
+        [CheckDateRange()]
+        //[Compare(nameof(CreationDate), ErrorMessage = "End date must be equal to or greater than start date")]
         public DateTime? FinishedDate { get; set; }
 
         public bool? Finished { get; set; }
 
         [ForeignKey("GroupModel")]
         public int? GroupModelId { get; set; }
+
+    }
+
+    public class CheckDateRangeAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            DateTime dt = (DateTime)value;
+            if (dt.Date >= DateTime.UtcNow.Date)
+            {
+                return ValidationResult.Success;
+            }
+
+            return new ValidationResult(ErrorMessage ?? "Make sure the date is today or later");
+        }
 
     }
 }
