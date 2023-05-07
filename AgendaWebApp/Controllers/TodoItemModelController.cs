@@ -27,5 +27,10 @@ namespace AgendaWebApp.Controllers
             TodoItemModel item = await _context.GetByIdAsync(id);
             return View(item);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            return View(); 
+        }
     }
 }

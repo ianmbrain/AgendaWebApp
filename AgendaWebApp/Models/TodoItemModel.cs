@@ -8,14 +8,17 @@ namespace AgendaWebApp.Models
     {
         [Key]
         public int Id { get; set; }
-
+        
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
         /// <summary>
         /// Field set to one of the values from ImportanceEnum.
         /// </summary>
+        [Required, EnumDataType(typeof(ImportanceEnum))]
         public ImportanceEnum Importance { get; set; }
 
         [DataType(DataType.Date)]
