@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AgendaWebApp.Data.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace AgendaWebApp.Models
 {
@@ -11,12 +12,15 @@ namespace AgendaWebApp.Models
 
         public string Description { get; set; }
 
-        public string Importance { get; set; }
+        /// <summary>
+        /// Field set to one of the values from ImportanceEnum.
+        /// </summary>
+        public ImportanceEnum Importance { get; set; }
 
         public DateTime CreationDate { get; set; }
 
-        public DateTime FinishedDate { get; set; }
+        public DateTime? FinishedDate { get; set; }
 
-        public bool Finished { get; set; }
+        public bool? Finished { get; set; }
     }
 }
