@@ -35,7 +35,7 @@ namespace AgendaWebApp.Models
         //[Compare(nameof(CreationDate), ErrorMessage = "End date must be equal to or greater than start date")]
         public DateTime? FinishedDate { get; set; }
 
-        public bool? Finished { get; set; }
+        public bool Finished { get; set; } = false;
 
         [ForeignKey("GroupModel")]
         public int? GroupModelId { get; set; }

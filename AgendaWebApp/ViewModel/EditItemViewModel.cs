@@ -21,7 +21,7 @@ namespace AgendaWebApp.ViewModel
         [Required, DataType(DataType.Date)]
         public DateTime? FinishedDate { get; set; }
 
-        public bool? Finished { get; set; }
+        public bool Finished { get; set; }
 
         public int? GroupModelId { get; set; }
     }
