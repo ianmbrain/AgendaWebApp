@@ -136,6 +136,34 @@ namespace AgendaWebApp.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        public async Task<IActionResult> Finish(int id)
+        {
+            var editItem = await _context.GetByIdAsyncNoTracking(id);
+
+            if (editItem != null)
+            {
+                var item = new TodoItemModel
+                {
+                    Id = id,
+                    Name = editItem.Name,
+                    Description = editItem.Description,
+                    Importance = editItem.Importance,
+                    CreationDate = editItem.CreationDate,
+                    FinishedDate = editItem.FinishedDate,
+                    Finished = true,
+                    GroupModelId = editItem.GroupModelId
+                };
+
+                _context.Update(item);
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
     }
 
 }
