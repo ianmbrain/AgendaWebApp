@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgendaWebApp.Models
 {
-    public class AppUser
+    public class AppUser 
     {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string FirstName { get; set; }
 
@@ -14,6 +15,8 @@ namespace AgendaWebApp.Models
 
         public string Email { get; set; }
 
+        [ForeignKey("GroupModelId")]
+        public int GroupId { get; set; }
         public ICollection<GroupModel> Groups { get; set; }
     }
 }

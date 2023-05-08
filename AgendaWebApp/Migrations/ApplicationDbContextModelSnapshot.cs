@@ -41,7 +41,7 @@ namespace AgendaWebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppUser");
+                    b.ToTable("AppUser", (string)null);
                 });
 
             modelBuilder.Entity("AgendaWebApp.Models.GroupModel", b =>
@@ -71,7 +71,7 @@ namespace AgendaWebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Groups");
+                    b.ToTable("Groups", (string)null);
                 });
 
             modelBuilder.Entity("AgendaWebApp.Models.TodoItemModel", b =>
@@ -109,7 +109,7 @@ namespace AgendaWebApp.Migrations
 
                     b.HasIndex("GroupModelId");
 
-                    b.ToTable("TodoItems");
+                    b.ToTable("TodoItems", (string)null);
                 });
 
             modelBuilder.Entity("AppUserGroupModel", b =>
@@ -124,7 +124,7 @@ namespace AgendaWebApp.Migrations
 
                     b.HasIndex("GroupsId");
 
-                    b.ToTable("AppUserGroupModel");
+                    b.ToTable("AppUserGroupModel", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -1,5 +1,7 @@
 using AgendaWebApp.Data;
+using AgendaWebApp.Models;
 using AgendaWebApp.Service;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
