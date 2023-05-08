@@ -2,10 +2,8 @@
 {
     public enum ImportanceEnum
     {
-        Unimportant,
         Minor,
         Relevant,
-        Important,
-        Critical
+        Important
     }
 }

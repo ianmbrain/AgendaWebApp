@@ -30,7 +30,7 @@ namespace AgendaWebApp.Models
         [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; } = DateTime.Now;
 
-        [Required, DataType(DataType.Date)]
+        [DataType(DataType.Date)]
         [CheckDateRange()]
         //[Compare(nameof(CreationDate), ErrorMessage = "End date must be equal to or greater than start date")]
         public DateTime? FinishedDate { get; set; }
@@ -46,6 +46,12 @@ namespace AgendaWebApp.Models
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
+            // If the FinishedDate param is null then it does not have a finished date and thus does not need to be validated.
+            if(value == null)
+            {
+                return ValidationResult.Success;
+            }
+
             DateTime dt = (DateTime)value;
             if (dt.Date >= DateTime.UtcNow.Date)
             {
