@@ -121,6 +121,21 @@ namespace AgendaWebApp.Controllers
             }
 
         }
+        
+        public async Task<IActionResult> Delete(int id)
+        {
+            var taskDetails = await _context.GetByIdAsync(id);
 
+            if(taskDetails != null) 
+            {
+                _context.Delete(taskDetails);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
     }
+
 }
