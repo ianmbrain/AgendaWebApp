@@ -27,6 +27,12 @@ namespace AgendaWebApp.Service
             return Save();
         }
 
+        public bool Update(TodoItemModel item)
+        {
+            _context.Update(item);
+            return Save();
+        }
+
         /// <summary>
         /// Returns a list of all the tasks in the database
         /// Task is used to return an object.
@@ -41,6 +47,11 @@ namespace AgendaWebApp.Service
         public async Task<TodoItemModel> GetByIdAsync(int id)
         {
             return await _context.TodoItems.FirstOrDefaultAsync(i => i.Id == id);
+        }
+
+        public async Task<TodoItemModel> GetByIdAsyncNoTracking(int id)
+        {
+            return await _context.TodoItems.AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task<IEnumerable<TodoItemModel>> GetItemByImportance(ImportanceEnum importance)

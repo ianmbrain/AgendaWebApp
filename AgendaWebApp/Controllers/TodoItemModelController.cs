@@ -1,6 +1,7 @@
 ﻿using AgendaWebApp.Data;
 using AgendaWebApp.Models;
 using AgendaWebApp.Service;
+using AgendaWebApp.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaWebApp.Controllers
@@ -44,6 +45,81 @@ namespace AgendaWebApp.Controllers
 
             _context.Add(item);
             return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Returns the edit view preloaded with the values from the specified item.
+        /// Uses the item repository service to retrieve the item from the database
+        /// </summary>
+        /// <param name="id"> Id of item to edit </param>
+        /// <returns> View containing the item values preloaded </returns>
+        public async Task<IActionResult> Edit(int id)
+        {
+            var item = await _context.GetByIdAsync(id);
+
+            if(item == null)
+            {
+                return View("Error");
+            }
+
+            // Creates a new itemVM using the values from the item. Inserts them into the view to preload the values.
+            var itemVM = new EditItemViewModel
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Description = item.Description,
+                Importance = item.Importance,
+                CreationDate = item.CreationDate,
+                FinishedDate = item.FinishedDate,
+                Finished = item.Finished,
+                GroupModelId = item.GroupModelId
+            };
+
+            // Returns the view preloaded with the item fields.
+            return View(itemVM);
+        }
+
+        /// <summary>
+        /// Edit post action. Utilizes the itemVM object for the edit get action. 
+        /// Substitutes the value of the item with the associated id with update values from the item view model.
+        /// </summary>
+        /// <param name="id"> Id of task to update </param>
+        /// <param name="itemVM"> Task that was created from the get edit view </param>
+        /// <returns> The index view if the update was successful or edit view if a value was incorrect </returns>
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditItemViewModel itemVM)
+        {
+            if(!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Unable to edit item");
+                return View("Edit", itemVM);
+            }
+
+            var editItem = await _context.GetByIdAsyncNoTracking(id);
+
+            if(editItem != null)
+            {
+                var item = new TodoItemModel
+                {
+                    Id = id,
+                    Name = itemVM.Name,
+                    Description = itemVM.Description,
+                    Importance = itemVM.Importance,
+                    CreationDate = itemVM.CreationDate,
+                    FinishedDate = itemVM.FinishedDate,
+                    Finished = itemVM.Finished,
+                    GroupModelId = itemVM.GroupModelId
+                };
+
+                _context.Update(item);
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(itemVM);
+            }
+
         }
 
     }

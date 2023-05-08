@@ -7,9 +7,11 @@ namespace AgendaWebApp.Service
     {
         Task<IEnumerable<TodoItemModel>> GetAll();
         Task<TodoItemModel> GetByIdAsync(int id);
+        Task<TodoItemModel> GetByIdAsyncNoTracking(int id);
         Task<IEnumerable<TodoItemModel>> GetItemByImportance(ImportanceEnum importance);
         bool Add(TodoItemModel item);
         bool Delete(TodoItemModel item);
+        bool Update(TodoItemModel item);
         bool Save();
 
 
