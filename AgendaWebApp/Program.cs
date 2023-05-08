@@ -18,6 +18,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ITodoItemModelRepository, TodoItemModelRepository>();
+builder.Services.AddScoped<IGroupModelRepository, GroupModelRepository>();
 
 var app = builder.Build();
 

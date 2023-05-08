@@ -5,13 +5,12 @@ namespace AgendaWebApp.Service
 {
     public interface IGroupModelRepository
     {
-        Task<IEnumerable<TodoItemModel>> GetAll();
-        Task<TodoItemModel> GetByIdAsync(int id);
-        Task<TodoItemModel> GetByIdAsyncNoTracking(int id);
-        Task<IEnumerable<TodoItemModel>> GetItemByImportance(ImportanceEnum importance);
-        bool Add(TodoItemModel item);
-        bool Delete(TodoItemModel item);
-        bool Update(TodoItemModel item);
+        Task<IEnumerable<GroupModel>> GetAll();
+        Task<GroupModel> GetByIdAsync(int id);
+        Task<GroupModel> GetByIdAsyncNoTracking(int id);
+        bool Add(GroupModel item);
+        bool Delete(GroupModel item);
+        bool Update(GroupModel item);
         bool Save();
     }
 }

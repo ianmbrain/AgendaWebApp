@@ -7,11 +7,11 @@ namespace AgendaWebApp.Controllers
 {
     public class GroupModelController : Controller
     {
-        private readonly GroupModelRepository _context;
+        private readonly IGroupModelRepository _context;
 
-        public GroupModelController(GroupModelRepository GroupRepo)
+        public GroupModelController(IGroupModelRepository groupRepo)
         {
-            _context = GroupRepo;
+            _context = groupRepo;
         }
 
         public IActionResult Index()
@@ -25,14 +25,14 @@ namespace AgendaWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(TodoItemModel item)
+        public async Task<IActionResult> Create(GroupModel group)
         {
             if (!ModelState.IsValid)
             {
-                return View(item);
+                return View(group);
             }
 
-            _context.Add(item);
+            _context.Add(group);
             return RedirectToAction("Index");
         }
     }
