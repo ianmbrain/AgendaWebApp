@@ -7,10 +7,15 @@
 @foreach (var item in Model)
 {
     <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">@item.Name</h5>
-            <p class="card-text">@item.Description</p>
-            <a href="/TodoItemModel/GetTasksByGroupId/@item.GroupId" class="btn btn-primary">View tasks</a>
+        <div class="card-header">
+            Group id: <span>@item.GroupId</span>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">@item.Description</p>
+                <a href="/TodoItemModel/GetTasksByGroupId/@item.GroupId" class="btn btn-primary">View tasks</a>
+            </div>
         </div>
     </div>
 }
