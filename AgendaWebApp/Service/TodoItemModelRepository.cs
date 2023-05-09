@@ -59,6 +59,11 @@ namespace AgendaWebApp.Service
             return await _context.TodoItems.Where(i => i.Importance == importance).ToListAsync();
         }
 
+        public async Task<IEnumerable<TodoItemModel>> GetItemByGroupId(int groupId)
+        {
+            return await _context.TodoItems.Where(i => i.GroupModelId == groupId).ToListAsync();
+        }
+
         public async Task<IEnumerable<TodoItemModel>> GetUnfinishedItems(bool finished)
         {
             return await _context.TodoItems.Where(i => i.Finished == finished || i.Finished == null).ToListAsync();

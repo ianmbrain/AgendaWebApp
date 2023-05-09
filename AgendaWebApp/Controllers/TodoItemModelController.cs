@@ -22,6 +22,12 @@ namespace AgendaWebApp.Controllers
             return View(items);
         }
 
+        public async Task<IActionResult> GetTasksByGroupId(int id)
+        {
+            IEnumerable<TodoItemModel> items = await _context.GetItemByGroupId(id);
+            return View(items);
+        }
+
         public async Task<IActionResult> Details(int id)
         {
             // Include "Include(a => a.GroupModelId)." after TodoItems if using join

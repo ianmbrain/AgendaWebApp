@@ -31,6 +31,11 @@ namespace AgendaWebApp.Service
             return await _context.Groups.ToListAsync();
         }
 
+        /*public async Task<IEnumerable<TodoItemModel>> GetItemsByGroup(int id)
+        {
+            return await _context.TodoItems.Where(i => i.GroupModelId == id).ToListAsync();
+        }*/
+
         public Task<GroupModel> GetByIdAsync(int id)
         {
             throw new NotImplementedException();

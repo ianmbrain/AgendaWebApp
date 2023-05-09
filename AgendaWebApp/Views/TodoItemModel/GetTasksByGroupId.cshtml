@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TodoItemModel>
+
+<div>
+    <a href="/TodoItemModel/Create" class="btn btn-primary btn-lg">Create task</a>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="card">
+        <div class="card-header">
+            @if (@item.Importance == AgendaWebApp.Data.Enum.ImportanceEnum.Minor)
+            {
+                <span class="badge rounded-pill bg-success badge-lg">@item.Importance</span>
+            }
+            else if (@item.Importance == AgendaWebApp.Data.Enum.ImportanceEnum.Relevant)
+            {
+                <span class="badge rounded-pill bg-warning badge-sm">@item.Importance</span>
+            }
+            else
+            {
+                <span class="badge rounded-pill bg-danger">@item.Importance</span>
+            }
+            @if (@item.FinishedDate != null)
+            {
+                <span>@item.FinishedDate.Value.ToShortDateString()</span>
+            }
+            <a href="/TodoItemModel/Finish/@item.Id" class="btn btn-success" style="float:right;">Finish task</a>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+            <p class="card-text">@item.Description</p>
+            <a href="/TodoItemModel/Edit/@item.Id" class="btn btn-primary">Edit</a>
+        </div>
+    </div>
+}
