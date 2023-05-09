@@ -36,5 +36,7 @@ namespace AgendaWebApp.Controllers
             _context.Add(group);
             return RedirectToAction("Index");
         }
+
+
     }
 }
