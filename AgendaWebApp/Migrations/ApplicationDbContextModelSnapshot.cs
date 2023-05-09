@@ -22,56 +22,25 @@ namespace AgendaWebApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AgendaWebApp.Models.AppUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppUser", (string)null);
-                });
-
             modelBuilder.Entity("AgendaWebApp.Models.GroupModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("GroupId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GroupId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TodoItemId")
-                        .HasColumnType("int");
+                    b.HasKey("GroupId");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Groups", (string)null);
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("AgendaWebApp.Models.TodoItemModel", b =>
@@ -89,7 +58,7 @@ namespace AgendaWebApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Finished")
+                    b.Property<bool>("Finished")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("FinishedDate")
@@ -107,24 +76,7 @@ namespace AgendaWebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupModelId");
-
-                    b.ToTable("TodoItems", (string)null);
-                });
-
-            modelBuilder.Entity("AppUserGroupModel", b =>
-                {
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("GroupsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AppUserId", "GroupsId");
-
-                    b.HasIndex("GroupsId");
-
-                    b.ToTable("AppUserGroupModel", (string)null);
+                    b.ToTable("TodoItems");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -329,28 +281,6 @@ namespace AgendaWebApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("AgendaWebApp.Models.TodoItemModel", b =>
-                {
-                    b.HasOne("AgendaWebApp.Models.GroupModel", null)
-                        .WithMany("TodoItem")
-                        .HasForeignKey("GroupModelId");
-                });
-
-            modelBuilder.Entity("AppUserGroupModel", b =>
-                {
-                    b.HasOne("AgendaWebApp.Models.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AgendaWebApp.Models.GroupModel", null)
-                        .WithMany()
-                        .HasForeignKey("GroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -400,11 +330,6 @@ namespace AgendaWebApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AgendaWebApp.Models.GroupModel", b =>
-                {
-                    b.Navigation("TodoItem");
                 });
 #pragma warning restore 612, 618
         }

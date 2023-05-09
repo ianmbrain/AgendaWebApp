@@ -26,9 +26,9 @@ namespace AgendaWebApp.Service
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<GroupModel>> GetAll()
+        public async Task<IEnumerable<GroupModel>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Groups.ToListAsync();
         }
 
         public Task<GroupModel> GetByIdAsync(int id)

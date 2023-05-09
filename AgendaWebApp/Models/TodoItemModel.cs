@@ -1,5 +1,4 @@
 ﻿using AgendaWebApp.Data.Enum;
-using AgendaWebApp.Migrations;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.ComponentModel;

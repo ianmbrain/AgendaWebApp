@@ -14,9 +14,10 @@ namespace AgendaWebApp.Controllers
             _context = groupRepo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IEnumerable<GroupModel> groups = await _context.GetAll();
+            return View(groups);
         }
 
         public async Task<IActionResult> Create()
