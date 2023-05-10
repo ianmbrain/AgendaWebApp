@@ -8,11 +8,13 @@ namespace AgendaWebApp.Service
     public class GroupModelRepository : IGroupModelRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public GroupModelRepository(ApplicationDbContext context)
+        public GroupModelRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             // Uses the database tables from the ApplicationDbContext class.
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public bool Add(GroupModel item)
@@ -28,13 +30,10 @@ namespace AgendaWebApp.Service
 
         public async Task<IEnumerable<GroupModel>> GetAll()
         {
-            return await _context.Groups.ToListAsync();
+            var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
+            var userGroups = _context.Groups.Where(i => i.AppUserId == curUser);
+            return userGroups.ToList();
         }
-
-        /*public async Task<IEnumerable<TodoItemModel>> GetItemsByGroup(int id)
-        {
-            return await _context.TodoItems.Where(i => i.GroupModelId == id).ToListAsync();
-        }*/
 
         public Task<GroupModel> GetByIdAsync(int id)
         {
