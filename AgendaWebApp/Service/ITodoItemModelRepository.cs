@@ -6,6 +6,7 @@ namespace AgendaWebApp.Service
     public interface ITodoItemModelRepository
     {
         Task<IEnumerable<TodoItemModel>> GetAll();
+        Task<IEnumerable<TodoItemModel>> GetAllByUser();
         Task<TodoItemModel> GetByIdAsync(int id);
         Task<TodoItemModel> GetByIdAsyncNoTracking(int id);
         Task<IEnumerable<TodoItemModel>> GetItemByImportance(ImportanceEnum importance);

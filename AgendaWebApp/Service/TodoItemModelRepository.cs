@@ -1,6 +1,7 @@
 ﻿using AgendaWebApp.Data;
 using AgendaWebApp.Data.Enum;
 using AgendaWebApp.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgendaWebApp.Service
@@ -9,10 +10,13 @@ namespace AgendaWebApp.Service
     {
         private readonly ApplicationDbContext _context;
 
-        public TodoItemModelRepository(ApplicationDbContext context)  
-        { 
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public TodoItemModelRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)  
+        {
             // Uses the database tables from the ApplicationDbContext class.
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public bool Add(TodoItemModel item)
@@ -41,7 +45,29 @@ namespace AgendaWebApp.Service
         /// <returns>List of all the tasks in the database</returns>
         public async Task<IEnumerable<TodoItemModel>> GetAll()
         {
-            return await _context.TodoItems.ToListAsync();
+            var currentTasks = _context.TodoItems.Where(i => i.Finished == false);
+            return await currentTasks.ToListAsync();
+        }
+
+        public async Task<IEnumerable<TodoItemModel>> GetAllByUser()
+        {
+            var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
+
+            var currentTasks = (from g in _context.Groups
+                                join t in _context.TodoItems on g.GroupId equals t.GroupModelId
+                                where g.AppUserId == curUser && t.Finished == false
+                                select new TodoItemModel
+                                {
+                                    Id = t.Id,
+                                    Name = t.Name,
+                                    Description = t.Description,
+                                    Importance = t.Importance,
+                                    CreationDate = t.CreationDate,
+                                    FinishedDate = t.FinishedDate,
+                                    Finished = t.Finished,
+                                    GroupModelId = t.GroupModelId
+                                }).ToListAsync();
+            return await currentTasks;
         }
 
         public async Task<TodoItemModel> GetByIdAsync(int id)
@@ -61,7 +87,7 @@ namespace AgendaWebApp.Service
 
         public async Task<IEnumerable<TodoItemModel>> GetItemByGroupId(int groupId)
         {
-            return await _context.TodoItems.Where(i => i.GroupModelId == groupId).ToListAsync();
+            return await _context.TodoItems.Where(i => i.GroupModelId == groupId && i.Finished == false).ToListAsync();
         }
 
         public async Task<IEnumerable<TodoItemModel>> GetUnfinishedItems(bool finished)

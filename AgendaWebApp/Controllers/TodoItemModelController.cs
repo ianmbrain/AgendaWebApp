@@ -19,7 +19,7 @@ namespace AgendaWebApp.Controllers
         public async Task<IActionResult> Index()
         {
             // This is returning the list of the items in the TodoItems table.
-            IEnumerable<TodoItemModel> items = await _context.GetAll();
+            IEnumerable<TodoItemModel> items = await _context.GetAllByUser();
             return View(items);
         }
 
