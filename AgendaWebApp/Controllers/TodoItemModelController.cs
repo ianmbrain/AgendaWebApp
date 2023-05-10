@@ -39,7 +39,8 @@ namespace AgendaWebApp.Controllers
 
         public async Task<IActionResult> Create(int id)
         {
-            // Used to pass in the groupId. Needed as otherwise the program assumes the id is id of the card
+            // Used to pass in the groupId. Needed as otherwise the program assumes the id is id of the card.
+            // This can be redone using a view model like done for passing the current user to group
             TodoItemModel item = new TodoItemModel { Name = "", Description = "", CreationDate = DateTime.Now, FinishedDate =  DateTime.Now, Finished = false, Importance = 0, GroupModelId = id}; ;
             return View(item);
         }
