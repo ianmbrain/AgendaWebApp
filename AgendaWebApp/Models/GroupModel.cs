@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgendaWebApp.Models
@@ -25,6 +26,10 @@ namespace AgendaWebApp.Models
         /// Description of group
         /// </summary>
         public string Description { get; set; }
+
+        [ForeignKey("AppUser")]
+        public string? AppUserId { get; set; }
+        public IdentityUser? AppUser { get; set; }
 
 /*        /// <summary>
         /// Todo items associated with the group
