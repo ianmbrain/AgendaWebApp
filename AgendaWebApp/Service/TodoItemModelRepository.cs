@@ -45,7 +45,7 @@ namespace AgendaWebApp.Service
         /// <returns>List of all the tasks in the database</returns>
         public async Task<IEnumerable<TodoItemModel>> GetAll()
         {
-            var currentTasks = _context.TodoItems.Where(i => i.Finished == false);
+            var currentTasks = _context.TodoItems.OrderByDescending(m => m.Importance);
             return await currentTasks.ToListAsync();
         }
 

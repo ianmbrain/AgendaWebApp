@@ -23,6 +23,13 @@ namespace AgendaWebApp.Controllers
             return View(items);
         }
 
+        public async Task<IActionResult> AllTasks()
+        {
+            // This is returning the list of the items in the TodoItems table.
+            IEnumerable<TodoItemModel> items = await _context.GetAll();
+            return View(items);
+        }
+
         public async Task<IActionResult> GetTasksByGroupId(int id = 0)
         {
             IEnumerable<TodoItemModel> items = await _context.GetItemByGroupId(id);
