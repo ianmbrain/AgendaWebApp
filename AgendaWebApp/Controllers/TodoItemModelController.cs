@@ -23,9 +23,10 @@ namespace AgendaWebApp.Controllers
             return View(items);
         }
 
-        public async Task<IActionResult> GetTasksByGroupId(int id)
+        public async Task<IActionResult> GetTasksByGroupId(int id = 0)
         {
             IEnumerable<TodoItemModel> items = await _context.GetItemByGroupId(id);
+            ViewData["currentGroup"] = id;
             return View(items);
         }
 
@@ -36,9 +37,10 @@ namespace AgendaWebApp.Controllers
             return View(item);
         }
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int id)
         {
-            return View();
+            TodoItemModel item = new TodoItemModel { Name = "", Description = "", CreationDate = DateTime.Now, FinishedDate =  DateTime.Now, Finished = false, Importance = 0, GroupModelId = id}; ;
+            return View(item);
         }
 
         [HttpPost]
@@ -90,7 +92,7 @@ namespace AgendaWebApp.Controllers
             // Creates a new itemVM using the values from the item. Inserts them into the view to preload the values.
             var itemVM = new EditItemViewModel
             {
-                Id = item.Id,
+                Id = (int)item.Id,
                 Name = item.Name,
                 Description = item.Description,
                 Importance = item.Importance,

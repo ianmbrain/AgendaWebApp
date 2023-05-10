@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<TodoItemModel>
+@{
+    int currentGroup = (int)ViewData["currentGroup"];
+}
 
 <div>
-    <a href="/TodoItemModel/Create" class="btn btn-primary btn-lg">Create task</a>
+    <a href="/TodoItemModel/Create/@currentGroup" class="btn btn-primary btn-lg">Create task</a>
 </div>
 
 @foreach (var item in Model)
