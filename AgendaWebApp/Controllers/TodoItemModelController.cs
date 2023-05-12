@@ -30,6 +30,7 @@ namespace AgendaWebApp.Controllers
             return View(items);
         }
 
+        // Defaults to 0 so that if no group id is provided it uses the "0" group id which no group has
         public async Task<IActionResult> GetTasksByGroupId(int id = 0)
         {
             IEnumerable<TodoItemModel> items = await _context.GetItemByGroupId(id);
