@@ -75,7 +75,8 @@ namespace AgendaWebApp.Controllers
             };
             
             _context.Add(todo);
-            return RedirectToAction("Index");
+
+            return RedirectToAction("GetTasksByGroupId", new { id = item.GroupModelId});
         }
 
         /// <summary>
@@ -144,7 +145,7 @@ namespace AgendaWebApp.Controllers
 
                 _context.Update(item);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("GetTasksByGroupId", new { id = item.GroupModelId });
             }
             else
             {
