@@ -101,9 +101,9 @@ namespace AgendaWebApp.Service
             return saved > 0 ? true : false;
         }
 
-        public ICollection<GroupModel> GetGroups()
+        public ICollection<int> GetGroups()
         {
-            return _context.Groups.ToList();
+            return _context.Groups.Select(i => i.GroupId).ToList();
         }
     }
 }

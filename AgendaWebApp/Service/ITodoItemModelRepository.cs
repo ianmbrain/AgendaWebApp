@@ -15,6 +15,6 @@ namespace AgendaWebApp.Service
         bool Delete(TodoItemModel item);
         bool Update(TodoItemModel item);
         bool Save();
-        ICollection<GroupModel> GetGroups();
+        ICollection<int> GetGroups();
     }
 }

@@ -80,13 +80,37 @@ namespace AgendaWebApp.Controllers
             return RedirectToAction("GetTasksByGroupId", new { id = item.GroupModelId});
         }
 
-        public IActionResult CreateNoGroup(int id)
+        public IActionResult CreateNoGroup()
         {
-            List<GroupModel> groups = _context.GetGroups().ToList();
+            List<int> groups = (List<int>)_context.GetGroups();
             //SelectList groupList = new SelectList(groups, "Id");
             ViewData["GroupList"] = groups;
 
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateNoGroup(CreateTodoItemViewModel item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(item);
+            }
+
+            TodoItemModel todo = new TodoItemModel
+            {
+                Name = item.Name,
+                Description = item.Description,
+                Importance = item.Importance,
+                CreationDate = item.CreationDate,
+                FinishedDate = item.FinishedDate,
+                Finished = item.Finished,
+                GroupModelId = item.GroupModelId
+            };
+
+            _context.Add(todo);
+
+            return RedirectToAction("Index");
         }
 
         /// <summary>
