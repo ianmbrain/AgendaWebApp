@@ -28,19 +28,19 @@ namespace AgendaWebApp.Service
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<GroupModel>> GetAll()
+        public ICollection<GroupModel> GetAll()
         {
             var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
             var userGroups = _context.Groups.Where(i => i.AppUserId == curUser);
             return userGroups.ToList();
         }
 
-        public Task<GroupModel> GetByIdAsync(int id)
+        public GroupModel GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<GroupModel> GetByIdAsyncNoTracking(int id)
+        public GroupModel GetByIdNoTracking(int id)
         {
             throw new NotImplementedException();
         }

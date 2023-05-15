@@ -18,13 +18,13 @@ namespace AgendaWebApp.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            IEnumerable<GroupModel> groups = await _context.GetAll();
+            IEnumerable<GroupModel> groups = _context.GetAll();
             return View(groups);
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             // User who is currently logged in. '?' is used to allow current user to be null.
             var curUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
@@ -33,7 +33,7 @@ namespace AgendaWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateGroupViewModel groupVM)
+        public IActionResult Create(CreateGroupViewModel groupVM)
         {
             /*if (!ModelState.IsValid)
             {

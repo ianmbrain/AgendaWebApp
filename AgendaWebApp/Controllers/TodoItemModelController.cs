@@ -41,7 +41,7 @@ namespace AgendaWebApp.Controllers
         public IActionResult Details(int id)
         {
             // Include "Include(a => a.GroupModelId)." after TodoItems if using join
-            TodoItemModel item = _context.GetByIdAsync(id);
+            TodoItemModel item = _context.GetById(id);
             return View(item);
         }
 
@@ -92,7 +92,7 @@ namespace AgendaWebApp.Controllers
         /// <returns> View containing the item values preloaded </returns>
         public IActionResult Edit(int id)
         {
-            var item = _context.GetByIdAsync(id);
+            var item = _context.GetById(id);
 
             if(item == null)
             {
@@ -132,7 +132,7 @@ namespace AgendaWebApp.Controllers
                 return View("Edit", itemVM);
             }
 
-            var editItem = _context.GetByIdAsyncNoTracking(id);
+            var editItem = _context.GetByIdNoTracking(id);
 
             if(editItem != null)
             {
@@ -161,7 +161,7 @@ namespace AgendaWebApp.Controllers
         
         public IActionResult Delete(int id)
         {
-            var taskDetails = _context.GetByIdAsync(id);
+            var taskDetails = _context.GetById(id);
 
             if(taskDetails != null) 
             {
@@ -176,7 +176,7 @@ namespace AgendaWebApp.Controllers
 
         public IActionResult Finish(int id)
         {
-            var editItem = _context.GetByIdAsyncNoTracking(id);
+            var editItem = _context.GetByIdNoTracking(id);
 
             if (editItem != null)
             {
