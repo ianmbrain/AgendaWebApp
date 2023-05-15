@@ -8,7 +8,7 @@ namespace AgendaWebApp.Service
     {
         string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TodoContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
-        public async Task<IEnumerable<GroupModel>> GetGroupsByUser(string userId)
+        public ICollection<GroupModel> GetGroupsByUser(string userId)
         {
             List<GroupModel> foundGroups = new List<GroupModel>();
 
