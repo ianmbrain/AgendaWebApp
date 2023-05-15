@@ -49,12 +49,13 @@ namespace AgendaWebApp.Controllers
         {
             // Used to pass in the groupId. Needed as otherwise the program assumes the id is id of the card.
             // This can be redone using a view model like done for passing the current user to group
-            TodoItemModel item = new TodoItemModel { Name = "", Description = "", CreationDate = DateTime.Now, FinishedDate =  DateTime.Now, Finished = false, Importance = 0, GroupModelId = id}; ;
-            return View(item);
+            //TodoItemModel item = new TodoItemModel { Name = "", Description = "", CreationDate = DateTime.Now, FinishedDate =  DateTime.Now, Finished = false, Importance = 0, GroupModelId = id}; ;
+            var itemViewModel = new CreateTodoItemViewModel { GroupModelId = id };
+            return View(itemViewModel);
         }
 
         [HttpPost]
-        public IActionResult Create(TodoItemModel item)
+        public IActionResult Create(CreateTodoItemViewModel item)
         {
             // If the input is not valid the view will remain with validation text
             if(!ModelState.IsValid)
@@ -62,7 +63,18 @@ namespace AgendaWebApp.Controllers
                 return View(item);
             }
 
-            _context.Add(item);
+            TodoItemModel todo = new TodoItemModel
+            {
+                Name = item.Name,
+                Description = item.Description,
+                Importance = item.Importance,
+                CreationDate = item.CreationDate,
+                FinishedDate = item.FinishedDate,
+                Finished = item.Finished,
+                GroupModelId = item.GroupModelId
+            };
+            
+            _context.Add(todo);
             return RedirectToAction("Index");
         }
 

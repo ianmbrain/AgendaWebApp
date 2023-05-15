@@ -60,10 +60,5 @@ namespace AgendaWebApp.Controllers
                 return View(groupVM);
             }
         }
-
-        /*public async Task<IActionResult> ViewTasks(int id)
-        {
-
-        }*/
     }
 }
