@@ -3,6 +3,7 @@ using AgendaWebApp.Models;
 using AgendaWebApp.Service;
 using AgendaWebApp.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 
 namespace AgendaWebApp.Controllers
@@ -77,6 +78,15 @@ namespace AgendaWebApp.Controllers
             _context.Add(todo);
 
             return RedirectToAction("GetTasksByGroupId", new { id = item.GroupModelId});
+        }
+
+        public IActionResult CreateNoGroup(int id)
+        {
+            List<GroupModel> groups = _context.GetGroups().ToList();
+            //SelectList groupList = new SelectList(groups, "Id");
+            ViewData["GroupList"] = groups;
+
+            return View();
         }
 
         /// <summary>

@@ -100,5 +100,10 @@ namespace AgendaWebApp.Service
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+        public ICollection<GroupModel> GetGroups()
+        {
+            return _context.Groups.ToList();
+        }
     }
 }
