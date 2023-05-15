@@ -11,11 +11,6 @@ namespace AgendaWebApp.Models
         /// </summary>
         [Key]
         public int GroupId { get; set; }
-/*
-        /// <summary>
-        /// Group Id
-        /// </summary>
-        public int GroupId { get; set; }*/
 
         /// <summary>
         /// Name of group
@@ -30,19 +25,5 @@ namespace AgendaWebApp.Models
         [ForeignKey("AppUser")]
         public string? AppUserId { get; set; }
         public IdentityUser? AppUser { get; set; }
-
-/*        /// <summary>
-        /// Todo items associated with the group
-        /// </summary>
-        [ForeignKey("TodoItemModel")]
-        public int? TodoItemId { get; set; }
-        public ICollection<TodoItemModel> TodoItem { get; set; }
-
-        /// <summary>
-        /// App users associated with the group
-        /// </summary>
-        [ForeignKey("AppUser")]
-        public string? AppUserId { get; set; }
-        public ICollection<AppUser> AppUser { get; set; }*/
     }
 }

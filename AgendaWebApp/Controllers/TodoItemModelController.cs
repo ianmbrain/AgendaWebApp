@@ -66,24 +66,6 @@ namespace AgendaWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-       /* public async Task<IActionResult> CreateByGroupId(int id)
-        {
-            return View(id);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateByGroupId(TodoItemModel item)
-        {
-            // If the input is not valid the view will remain with validation text
-            if (!ModelState.IsValid)
-            {
-                return View(item);
-            }
-
-            _context.Add(item);
-            return RedirectToAction("Index");
-        }*/
-
         /// <summary>
         /// Returns the edit view preloaded with the values from the specified item.
         /// Uses the item repository service to retrieve the item from the database

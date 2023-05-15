@@ -2,6 +2,7 @@
 using AgendaWebApp.Service;
 using Autofac.Extras.Moq;
 using Elfie.Serialization;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace AgendaWebApp.Tests.Service.Test
     public class TodoRepositoryTests
     {
         [Fact]
-        public Task TodoItemModelRepository_GetAll()
+        public void TodoItemModelRepository_GetAll()
         {
             // GetStrict - method can be called but no other methods can be called
             // GetLoose - just tests if the one method was called
@@ -23,8 +24,7 @@ namespace AgendaWebApp.Tests.Service.Test
                 // Mock mocks the _context field in the repository class
                 mock.Mock<ITodoItemModelRepository>()
                     .Setup(x => x.GetAll())
-                    // Task. enables this to work for return types of Task
-                    .Returns(Task.FromResult<IEnumerable<TodoItemModel>>(GetAllSample()));
+                    .Returns(GetAllSample());
 
                 var repo = mock.Create<TodoItemModelRepository>();
                 var expected = GetAllSample();
@@ -42,9 +42,9 @@ namespace AgendaWebApp.Tests.Service.Test
             }
         }
 
-        private IEnumerable<TodoItemModel> GetAllSample()
+        private List<TodoItemModel> GetAllSample()
         {
-            IEnumerable<TodoItemModel> output = new List<TodoItemModel>
+            List<TodoItemModel> output = new List<TodoItemModel>
             {
                 new TodoItemModel
                 {

@@ -30,7 +30,7 @@ namespace AgendaWebApp.Tests.Controller.Test
         public void TodoItemController_Index_ReturnsSuccess()
         {
             //Arrange - what to bring in
-            var items = A.Fake<IEnumerable<TodoItemModel>>();
+            var items = A.Fake<ICollection<TodoItemModel>>();
             A.CallTo(() => _context.GetAll()).Returns(items);
 
             //Act
@@ -46,7 +46,7 @@ namespace AgendaWebApp.Tests.Controller.Test
             //Arrange
             var id = 1;
             var item = A.Fake<TodoItemModel>();
-            A.CallTo (() => _context.GetByIdAsync(id)).Returns(item);
+            A.CallTo (() => _context.GetById(id)).Returns(item);
 
             //Act
             var result = _itemController.Details(id);
