@@ -28,7 +28,7 @@ namespace AgendaWebApp.ViewModel
         [CheckDateRange()]
         [Required]
         //[Compare(nameof(CreationDate), ErrorMessage = "End date must be equal to or greater than start date")]
-        public DateTime? FinishedDate { get; set; }
+        public DateTime? FinishedDate { get; set; } = DateTime.Now;
 
         public bool Finished { get; set; } = false;
 
