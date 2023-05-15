@@ -16,36 +16,36 @@ namespace AgendaWebApp.Controllers
             _context = todoRepo;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             // This is returning the list of the items in the TodoItems table.
-            IEnumerable<TodoItemModel> items = await _context.GetAllByUser();
+            IEnumerable<TodoItemModel> items = _context.GetAllByUser();
             return View(items);
         }
 
-        public async Task<IActionResult> AllTasks()
+        public IActionResult AllTasks()
         {
             // This is returning the list of the items in the TodoItems table.
-            IEnumerable<TodoItemModel> items = await _context.GetAll();
+            IEnumerable<TodoItemModel> items = _context.GetAll();
             return View(items);
         }
 
         // Defaults to 0 so that if no group id is provided it uses the "0" group id which no group has
-        public async Task<IActionResult> GetTasksByGroupId(int id = 0)
+        public IActionResult GetTasksByGroupId(int id = 0)
         {
-            IEnumerable<TodoItemModel> items = await _context.GetItemByGroupId(id);
+            IEnumerable<TodoItemModel> items = _context.GetItemByGroupId(id);
             ViewData["currentGroup"] = id;
             return View(items);
         }
 
-        public async Task<IActionResult> Details(int id)
+        public IActionResult Details(int id)
         {
             // Include "Include(a => a.GroupModelId)." after TodoItems if using join
-            TodoItemModel item = await _context.GetByIdAsync(id);
+            TodoItemModel item = _context.GetByIdAsync(id);
             return View(item);
         }
 
-        public async Task<IActionResult> Create(int id)
+        public IActionResult Create(int id)
         {
             // Used to pass in the groupId. Needed as otherwise the program assumes the id is id of the card.
             // This can be redone using a view model like done for passing the current user to group
@@ -54,7 +54,7 @@ namespace AgendaWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(TodoItemModel item)
+        public IActionResult Create(TodoItemModel item)
         {
             // If the input is not valid the view will remain with validation text
             if(!ModelState.IsValid)
@@ -90,9 +90,9 @@ namespace AgendaWebApp.Controllers
         /// </summary>
         /// <param name="id"> Id of item to edit </param>
         /// <returns> View containing the item values preloaded </returns>
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit(int id)
         {
-            var item = await _context.GetByIdAsync(id);
+            var item = _context.GetByIdAsync(id);
 
             if(item == null)
             {
@@ -124,7 +124,7 @@ namespace AgendaWebApp.Controllers
         /// <param name="itemVM"> Task that was created from the get edit view </param>
         /// <returns> The index view if the update was successful or edit view if a value was incorrect </returns>
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditItemViewModel itemVM)
+        public IActionResult Edit(int id, EditItemViewModel itemVM)
         {
             if(!ModelState.IsValid)
             {
@@ -132,7 +132,7 @@ namespace AgendaWebApp.Controllers
                 return View("Edit", itemVM);
             }
 
-            var editItem = await _context.GetByIdAsyncNoTracking(id);
+            var editItem = _context.GetByIdAsyncNoTracking(id);
 
             if(editItem != null)
             {
@@ -159,9 +159,9 @@ namespace AgendaWebApp.Controllers
 
         }
         
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var taskDetails = await _context.GetByIdAsync(id);
+            var taskDetails = _context.GetByIdAsync(id);
 
             if(taskDetails != null) 
             {
@@ -174,9 +174,9 @@ namespace AgendaWebApp.Controllers
             }
         }
 
-        public async Task<IActionResult> Finish(int id)
+        public IActionResult Finish(int id)
         {
-            var editItem = await _context.GetByIdAsyncNoTracking(id);
+            var editItem = _context.GetByIdAsyncNoTracking(id);
 
             if (editItem != null)
             {

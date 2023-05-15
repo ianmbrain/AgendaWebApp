@@ -43,13 +43,13 @@ namespace AgendaWebApp.Service
         /// ToListAsync is needed from the async Task combo.
         /// </summary>
         /// <returns>List of all the tasks in the database</returns>
-        public async Task<IEnumerable<TodoItemModel>> GetAll()
+        public ICollection<TodoItemModel> GetAll()
         {
             var currentTasks = _context.TodoItems.OrderByDescending(m => m.Importance);
-            return await currentTasks.ToListAsync();
+            return currentTasks.ToList();
         }
 
-        public async Task<IEnumerable<TodoItemModel>> GetAllByUser()
+        public ICollection<TodoItemModel> GetAllByUser()
         {
             var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
 
@@ -66,33 +66,33 @@ namespace AgendaWebApp.Service
                                     FinishedDate = t.FinishedDate,
                                     Finished = t.Finished,
                                     GroupModelId = t.GroupModelId
-                                }).ToListAsync();
-            return await currentTasks;
+                                }).ToList();
+            return currentTasks;
         }
 
-        public async Task<TodoItemModel> GetByIdAsync(int id)
+        public TodoItemModel GetById(int id)
         {
-            return await _context.TodoItems.FirstOrDefaultAsync(i => i.Id == id);
+            return _context.TodoItems.FirstOrDefault(i => i.Id == id);
         }
 
-        public async Task<TodoItemModel> GetByIdAsyncNoTracking(int id)
+        public TodoItemModel GetByIdNoTracking(int id)
         {
-            return await _context.TodoItems.AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
+            return _context.TodoItems.AsNoTracking().FirstOrDefault(i => i.Id == id);
         }
 
-        public async Task<IEnumerable<TodoItemModel>> GetItemByImportance(ImportanceEnum importance)
+        public ICollection<TodoItemModel> GetItemByImportance(ImportanceEnum importance)
         {
-            return await _context.TodoItems.Where(i => i.Importance == importance).ToListAsync();
+            return _context.TodoItems.Where(i => i.Importance == importance).ToList();
         }
 
-        public async Task<IEnumerable<TodoItemModel>> GetItemByGroupId(int groupId)
+        public ICollection<TodoItemModel> GetItemByGroupId(int groupId)
         {
-            return await _context.TodoItems.Where(i => i.GroupModelId == groupId && i.Finished == false).ToListAsync();
+            return _context.TodoItems.Where(i => i.GroupModelId == groupId && i.Finished == false).ToList();
         }
 
-        public async Task<IEnumerable<TodoItemModel>> GetUnfinishedItems(bool finished)
+        public ICollection<TodoItemModel> GetUnfinishedItems(bool finished)
         {
-            return await _context.TodoItems.Where(i => i.Finished == finished || i.Finished == null).ToListAsync();
+            return _context.TodoItems.Where(i => i.Finished == finished || i.Finished == null).ToList();
         }
 
         public bool Save()
