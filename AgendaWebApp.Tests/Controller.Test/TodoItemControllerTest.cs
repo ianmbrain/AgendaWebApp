@@ -14,7 +14,7 @@ namespace AgendaWebApp.Tests.Controller.Test
     public class TodoItemControllerTest
     {
         [Fact]
-        public void Index_ReturnsAViewResult_ListOfTasks()
+        public void GetAll_ReturnsAViewResult_ListOfTasks()
         {
             // Arrange
             var mockRepo = new Mock<ITodoItemModelRepository>();
@@ -30,6 +30,27 @@ namespace AgendaWebApp.Tests.Controller.Test
             var model = Assert.IsAssignableFrom<IEnumerable<TodoItemModel>>(
                 viewResult.ViewData.Model);
             Assert.Equal(2, model.Count());
+        }
+
+        [Fact]
+        public void Details_ReturnsAViewResult_OneTask()
+        {
+            // Arrange
+            var mockRepo = new Mock<ITodoItemModelRepository>();
+            mockRepo.Setup(repo => repo.GetById(1))
+                .Returns(GetTodoItems().ElementAt(0));
+            var controller = new TodoItemModelController(mockRepo.Object);
+
+            // Act
+            var result = controller.Details(1);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<TodoItemModel>(
+                viewResult.ViewData.Model);
+            Assert.Equal(1, model.Id);
+            Assert.Equal("Name1", model.Name);
+            Assert.Equal("Description1", model.Description);
         }
 
         private List<TodoItemModel> GetTodoItems()
