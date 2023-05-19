@@ -35,7 +35,8 @@ namespace AgendaWebApp.Controllers
             var viewUser = new UserViewModel
             {
                 Id = i.Id,
-                Email = i.Email
+                Email = i.Email,
+                ActiveTaskCount = _userRepository.GetActiveTaskCount(i.Id)
             };
 
             viewUserList.Add(viewUser);
