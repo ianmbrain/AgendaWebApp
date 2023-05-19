@@ -1,0 +1,19 @@
+﻿@model IEnumerable<AgendaWebApp.ViewModel.UserViewModel>
+
+<div class="text-center">
+    <h1 class="display-4">Other Users </h1>
+    <p>These are the other users of the application. Use this application to complete your own to do items and see how well others are doing.</p>
+</div>
+
+@foreach(var item in Model)
+{
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@item.Email</h5>
+            <!--<p class="card-text">f@item.Description</p>
+            <a href = "/TodoItemModel/Edit/f@item.Id" class="btn btn-primary">Edit</a> -->
+        </div>
+    </div>
+}

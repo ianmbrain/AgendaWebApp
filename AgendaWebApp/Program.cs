@@ -19,6 +19,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ITodoItemModelRepository, TodoItemModelRepository>();
 builder.Services.AddScoped<IGroupModelRepository, GroupModelRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
