@@ -15,7 +15,7 @@ namespace AgendaWebApp.Models
         /// Id of the task. This is nullable to allow cards to be created relating to a specific group.
         /// </summary>
         [Key]
-        public int? Id { get; set; }
+        public int Id { get; set; }
         
         [Required]
         public string Name { get; set; }

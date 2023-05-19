@@ -1,10 +1,12 @@
 ﻿using AgendaWebApp.Controllers;
 using AgendaWebApp.Models;
 using AgendaWebApp.Service;
+using AgendaWebApp.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +42,6 @@ namespace AgendaWebApp.Tests.Controller.Test
             mockRepo.Setup(repo => repo.GetById(1))
                 .Returns(GetTodoItems().ElementAt(0));
             var controller = new TodoItemModelController(mockRepo.Object);
-
             // Act
             var result = controller.Details(1);
 
@@ -51,6 +52,23 @@ namespace AgendaWebApp.Tests.Controller.Test
             Assert.Equal(1, model.Id);
             Assert.Equal("Name1", model.Name);
             Assert.Equal("Description1", model.Description);
+        }
+
+        [Fact]
+        public void CreatePost_ReturnsAViewResult_CreateOneTask()
+        {
+            // Arrange
+            var mockRepo = new Mock<ITodoItemModelRepository>();
+            mockRepo.Setup(repo => repo.Add(GetTodoItems().ElementAt(0)));
+            var controller = new TodoItemModelController(mockRepo.Object);
+
+            // Act
+            var result = controller.Create(CreateViewModel());
+
+            // Assert
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("GetTasksByGroupId", redirectToActionResult.ActionName);
         }
 
         private List<TodoItemModel> GetTodoItems()
@@ -75,6 +93,19 @@ namespace AgendaWebApp.Tests.Controller.Test
                 GroupModelId = 1
             });
             return sessions;
+        }
+
+        private CreateTodoItemViewModel CreateViewModel()
+        {
+            return new CreateTodoItemViewModel
+            {
+                Id = 1,
+                Name = "Name1",
+                Description = "Description1",
+                Importance = 0,
+                CreationDate = new DateTime(2023, 5, 1),
+                GroupModelId = 1
+            };
         }
     }
 }

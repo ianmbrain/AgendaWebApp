@@ -6,20 +6,11 @@ namespace AgendaWebApp.Models
 {
     public class GroupModel
     {
-        /// <summary>
-        /// Primary key of group
-        /// </summary>
         [Key]
         public int GroupId { get; set; }
 
-        /// <summary>
-        /// Name of group
-        /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// Description of group
-        /// </summary>
         public string Description { get; set; }
 
         [ForeignKey("AppUser")]

@@ -15,9 +15,6 @@ namespace AgendaWebApp.ViewModel
         [Required]
         public string Description { get; set; }
 
-        /// <summary>
-        /// Field set to one of the values from ImportanceEnum.
-        /// </summary>
         [Required, EnumDataType(typeof(ImportanceEnum))]
         public ImportanceEnum Importance { get; set; }
 
@@ -27,7 +24,6 @@ namespace AgendaWebApp.ViewModel
         [DataType(DataType.Date)]
         [CheckDateRange()]
         [Required]
-        //[Compare(nameof(CreationDate), ErrorMessage = "End date must be equal to or greater than start date")]
         public DateTime? FinishedDate { get; set; } = DateTime.Now;
 
         public bool Finished { get; set; } = false;
