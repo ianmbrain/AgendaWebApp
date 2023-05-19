@@ -11,5 +11,8 @@ namespace AgendaWebApp.Service
         int GetActiveRelevant(string userId);
         int GetActiveImportant(string userId);
         int GetFinishedTaskCount(string userId);
+        int GetFinishedMinor(string userId);
+        int GetFinishedRelevant(string userId);
+        int GetFinishedImportant(string userId);
     }
 }

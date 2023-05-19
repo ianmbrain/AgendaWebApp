@@ -34,13 +34,16 @@ namespace AgendaWebApp.Controllers
         {
             var viewUser = new UserViewModel
             {
-                Id = i.Id,
                 Email = i.Email,
                 ActiveTaskCount = _userRepository.GetActiveTaskCount(i.Id),
                 ActiveMinorTasks = _userRepository.GetActiveMinor(i.Id),
                 ActiveRelevantTasks = _userRepository.GetActiveRelevant(i.Id),
                 ActiveImportantTasks = _userRepository.GetActiveImportant(i.Id),
-                FinishedTaskCount = _userRepository.GetFinishedTaskCount(i.Id)
+                FinishedTaskCount = _userRepository.GetFinishedTaskCount(i.Id),
+                FinishedMinorTasks = _userRepository.GetFinishedMinor(i.Id),
+                FinishedRelevantTasks = _userRepository.GetFinishedRelevant(i.Id),
+                FinishedImportantTasks = _userRepository.GetFinishedImportant(i.Id)
+
             };
 
             viewUserList.Add(viewUser);

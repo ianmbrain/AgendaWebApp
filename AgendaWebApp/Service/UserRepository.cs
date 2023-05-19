@@ -79,5 +79,44 @@ namespace AgendaWebApp.Service
 
             return activeTasks;
         }
+
+        public int GetFinishedMinor(string userId)
+        {
+            var activeTasks = (from g in _context.Groups
+                               join u in _context.Users on g.AppUserId equals u.Id
+                               join t in _context.TodoItems on g.GroupId equals t.GroupModelId
+                               where u.Id == userId
+                               where t.Finished == true
+                               where t.Importance == Data.Enum.ImportanceEnum.Relevant
+                               select t.Id).Count();
+
+            return activeTasks;
+        }
+
+        public int GetFinishedRelevant(string userId)
+        {
+            var activeTasks = (from g in _context.Groups
+                               join u in _context.Users on g.AppUserId equals u.Id
+                               join t in _context.TodoItems on g.GroupId equals t.GroupModelId
+                               where u.Id == userId
+                               where t.Finished == true
+                               where t.Importance == Data.Enum.ImportanceEnum.Relevant
+                               select t.Id).Count();
+
+            return activeTasks;
+        }
+
+        public int GetFinishedImportant(string userId)
+        {
+            var activeTasks = (from g in _context.Groups
+                               join u in _context.Users on g.AppUserId equals u.Id
+                               join t in _context.TodoItems on g.GroupId equals t.GroupModelId
+                               where u.Id == userId
+                               where t.Finished == true
+                               where t.Importance == Data.Enum.ImportanceEnum.Important
+                               select t.Id).Count();
+
+            return activeTasks;
+        }
     }
 }
