@@ -41,32 +41,43 @@ namespace AgendaWebApp.Service
             return activeTasks;
         }
 
-        public ICollection<string> GetUserTaskCount(string userId)
+        public int GetActiveMinor(string userId)
         {
-            var currentTasks = (from g in _context.Groups
-                                join u in _context.Users on g.AppUserId equals u.Id
-                                join t in _context.TodoItems on g.GroupId equals t.GroupModelId
-                                select new
-                                {
-                                    u.Id
-                                });
-            
-            throw new NotImplementedException();
+            var activeTasks = (from g in _context.Groups
+                               join u in _context.Users on g.AppUserId equals u.Id
+                               join t in _context.TodoItems on g.GroupId equals t.GroupModelId
+                               where u.Id == userId
+                               where t.Finished == false
+                               where t.Importance == Data.Enum.ImportanceEnum.Minor
+                               select t.Id).Count();
 
-            /*join t in _context.TodoItems on g.GroupId equals t.GroupModelId
-            where g.AppUserId == curUser && t.Finished == false
-            select new TodoItemModel
-            {
-                Id = t.Id,
-                Name = t.Name,
-                Description = t.Description,
-                Importance = t.Importance,
-                CreationDate = t.CreationDate,
-                FinishedDate = t.FinishedDate,
-                Finished = t.Finished,
-                GroupModelId = t.GroupModelId
-            }).ToList();*/
-            //return currentTasks;
+            return activeTasks;
+        }
+
+        public int GetActiveRelevant(string userId)
+        {
+            var activeTasks = (from g in _context.Groups
+                               join u in _context.Users on g.AppUserId equals u.Id
+                               join t in _context.TodoItems on g.GroupId equals t.GroupModelId
+                               where u.Id == userId
+                               where t.Finished == false
+                               where t.Importance == Data.Enum.ImportanceEnum.Relevant
+                               select t.Id).Count();
+
+            return activeTasks;
+        }
+
+        public int GetActiveImportant(string userId)
+        {
+            var activeTasks = (from g in _context.Groups
+                               join u in _context.Users on g.AppUserId equals u.Id
+                               join t in _context.TodoItems on g.GroupId equals t.GroupModelId
+                               where u.Id == userId
+                               where t.Finished == false
+                               where t.Importance == Data.Enum.ImportanceEnum.Important
+                               select t.Id).Count();
+
+            return activeTasks;
         }
     }
 }

@@ -37,6 +37,9 @@ namespace AgendaWebApp.Controllers
                 Id = i.Id,
                 Email = i.Email,
                 ActiveTaskCount = _userRepository.GetActiveTaskCount(i.Id),
+                ActiveMinorTasks = _userRepository.GetActiveMinor(i.Id),
+                ActiveRelevantTasks = _userRepository.GetActiveRelevant(i.Id),
+                ActiveImportantTasks = _userRepository.GetActiveImportant(i.Id),
                 FinishedTaskCount = _userRepository.GetFinishedTaskCount(i.Id)
             };
 
