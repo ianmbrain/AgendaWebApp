@@ -11,9 +11,6 @@ namespace AgendaWebApp.Models
 {
     public class TodoItemModel
     {
-        /// <summary>
-        /// Id of the task. This is nullable to allow cards to be created relating to a specific group.
-        /// </summary>
         [Key]
         public int Id { get; set; }
         

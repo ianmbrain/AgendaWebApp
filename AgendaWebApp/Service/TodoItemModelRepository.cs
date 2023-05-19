@@ -103,7 +103,8 @@ namespace AgendaWebApp.Service
 
         public ICollection<int> GetGroups()
         {
-            return _context.Groups.Select(i => i.GroupId).ToList();
+            var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
+            return _context.Groups.Where(i => i.AppUserId == curUser).Select(i => i.GroupId).ToList();
         }
     }
 }

@@ -86,7 +86,8 @@ namespace AgendaWebApp.Controllers
             //SelectList groupList = new SelectList(groups, "Id");
             ViewData["GroupList"] = groups;
 
-            return View();
+            var itemViewModel = new CreateTodoItemViewModel { };
+            return View(itemViewModel);
         }
 
         [HttpPost]
@@ -110,7 +111,7 @@ namespace AgendaWebApp.Controllers
 
             _context.Add(todo);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("GetTasksByGroupId", new { id = item.GroupModelId });
         }
 
         /// <summary>
