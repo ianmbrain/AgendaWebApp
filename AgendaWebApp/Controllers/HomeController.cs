@@ -36,7 +36,8 @@ namespace AgendaWebApp.Controllers
             {
                 Id = i.Id,
                 Email = i.Email,
-                ActiveTaskCount = _userRepository.GetActiveTaskCount(i.Id)
+                ActiveTaskCount = _userRepository.GetActiveTaskCount(i.Id),
+                FinishedTaskCount = _userRepository.GetFinishedTaskCount(i.Id)
             };
 
             viewUserList.Add(viewUser);

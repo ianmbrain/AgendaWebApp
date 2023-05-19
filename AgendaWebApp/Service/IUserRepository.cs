@@ -7,6 +7,7 @@ namespace AgendaWebApp.Service
     {
         ICollection<IdentityUser> GetAll();
         int GetActiveTaskCount(string userId);
+        int GetFinishedTaskCount(string userId);
         ICollection<string> GetUserTaskCount(string Id);
     }
 }

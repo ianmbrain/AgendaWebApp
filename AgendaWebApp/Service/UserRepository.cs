@@ -12,20 +12,33 @@ namespace AgendaWebApp.Service
             _context = context;
         }
 
+        public ICollection<IdentityUser> GetAll()
+        {
+            return _context.Users.ToList();
+        }
+
         public int GetActiveTaskCount(string userId)
         {
             var activeTasks = (from g in _context.Groups
-                                join u in _context.Users on g.AppUserId equals u.Id
-                                join t in _context.TodoItems on g.GroupId equals t.GroupModelId
-                                where u.Id == userId where t.Finished == false 
-                                select t.Id).Count();
+                               join u in _context.Users on g.AppUserId equals u.Id
+                               join t in _context.TodoItems on g.GroupId equals t.GroupModelId
+                               where u.Id == userId
+                               where t.Finished == false
+                               select t.Id).Count();
 
             return activeTasks;
         }
 
-        public ICollection<IdentityUser> GetAll()
+        public int GetFinishedTaskCount(string userId)
         {
-            return _context.Users.ToList();
+            var activeTasks = (from g in _context.Groups
+                               join u in _context.Users on g.AppUserId equals u.Id
+                               join t in _context.TodoItems on g.GroupId equals t.GroupModelId
+                               where u.Id == userId
+                               where t.Finished == true
+                               select t.Id).Count();
+
+            return activeTasks;
         }
 
         public ICollection<string> GetUserTaskCount(string userId)
