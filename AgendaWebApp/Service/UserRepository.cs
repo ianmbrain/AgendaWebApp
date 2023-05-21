@@ -87,7 +87,7 @@ namespace AgendaWebApp.Service
                                join t in _context.TodoItems on g.GroupId equals t.GroupModelId
                                where u.Id == userId
                                where t.Finished == true
-                               where t.Importance == Data.Enum.ImportanceEnum.Relevant
+                               where t.Importance == Data.Enum.ImportanceEnum.Minor
                                select t.Id).Count();
 
             return activeTasks;
