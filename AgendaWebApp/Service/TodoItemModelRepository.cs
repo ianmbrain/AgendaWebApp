@@ -45,8 +45,24 @@ namespace AgendaWebApp.Service
         /// <returns>List of all the tasks in the database</returns>
         public ICollection<TodoItemModel> GetAll()
         {
-            var currentTasks = _context.TodoItems.OrderByDescending(m => m.Importance);
-            return currentTasks.ToList();
+            var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
+
+            var currentTasks = (from g in _context.Groups
+                                join t in _context.TodoItems on g.GroupId equals t.GroupModelId
+                                where g.AppUserId == curUser
+                                orderby t.Importance descending, t.FinishedDate ascending
+                                select new TodoItemModel
+                                {
+                                    Id = t.Id,
+                                    Name = t.Name,
+                                    Description = t.Description,
+                                    Importance = t.Importance,
+                                    CreationDate = t.CreationDate,
+                                    FinishedDate = t.FinishedDate,
+                                    Finished = t.Finished,
+                                    GroupModelId = t.GroupModelId
+                                }).ToList();
+            return currentTasks;
         }
 
         public ICollection<TodoItemModel> GetAllByUser()
@@ -56,6 +72,7 @@ namespace AgendaWebApp.Service
             var currentTasks = (from g in _context.Groups
                                 join t in _context.TodoItems on g.GroupId equals t.GroupModelId
                                 where g.AppUserId == curUser && t.Finished == false
+                                orderby t.Importance descending, t.FinishedDate ascending
                                 select new TodoItemModel
                                 {
                                     Id = t.Id,
@@ -87,7 +104,7 @@ namespace AgendaWebApp.Service
 
         public ICollection<TodoItemModel> GetItemByGroupId(int groupId)
         {
-            return _context.TodoItems.Where(i => i.GroupModelId == groupId && i.Finished == false).ToList();
+            return _context.TodoItems.Where(i => i.GroupModelId == groupId && i.Finished == false).OrderByDescending(m => m.Importance).ThenBy(x => x.FinishedDate).ToList();
         }
 
         public ICollection<TodoItemModel> GetUnfinishedItems(bool finished)

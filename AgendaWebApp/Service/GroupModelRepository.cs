@@ -31,7 +31,7 @@ namespace AgendaWebApp.Service
         public ICollection<GroupModel> GetAll()
         {
             var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
-            var userGroups = _context.Groups.Where(i => i.AppUserId == curUser);
+            var userGroups = _context.Groups.Where(i => i.AppUserId == curUser).OrderBy(x => x.GroupId);
             return userGroups.ToList();
         }
 
