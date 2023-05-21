@@ -1,7 +1,7 @@
 ﻿@using AgendaWebApp.Data.Enum;
 @model AgendaWebApp.ViewModel.CreateTodoItemViewModel
 
-<h4>CreateTodoItemViewModel</h4>
+<h4>Create a new task</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -29,7 +29,7 @@
                 <input asp-for="FinishedDate" class="form-control" />
                 <span asp-validation-for="FinishedDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 1rem">
                 <label asp-for="GroupModelId" class="control-label"></label>
                 @Html.DropDownList("GroupModelId", new SelectList((List<int>) ViewData["GroupList"]), new { @class = "form-control" })
                 <!--<select asp-for="GroupModelId" asp-items="f@Html.DropDownList("GroupList", null, "Please select a product")" class="form-control">

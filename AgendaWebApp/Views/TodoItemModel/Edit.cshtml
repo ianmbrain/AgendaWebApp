@@ -1,7 +1,7 @@
 ﻿@using AgendaWebApp.Data.Enum;
 @model AgendaWebApp.ViewModel.EditItemViewModel
 
-<h4>EditItemViewModel</h4>
+<h4>Edit task</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -39,7 +39,7 @@
                     <!--<input name="boolean-parameter" type="checkbox" value="false" class="form-control" /> -->
                 </label>
             </div>
-            <div type="hidden" class="form-group">
+            <div type="hidden" class="form-group" style="margin-bottom: 1rem">
                 <input type="hidden" asp-for="GroupModelId" class="form-control" />
                 <span asp-validation-for="GroupModelId" class="text-danger"></span>
             </div>
