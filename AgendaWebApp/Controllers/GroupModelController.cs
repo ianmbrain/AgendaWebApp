@@ -20,8 +20,15 @@ namespace AgendaWebApp.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<GroupModel> groups = _context.GetAll();
-            return View(groups);
+            if (!User.Identity.IsAuthenticated)
+            {
+                return View("NoLoginView");
+            }
+            else
+            {
+                IEnumerable<GroupModel> groups = _context.GetAll();
+                return View(groups);
+            }
         }
 
         public IActionResult Create()
@@ -35,14 +42,6 @@ namespace AgendaWebApp.Controllers
         [HttpPost]
         public IActionResult Create(CreateGroupViewModel groupVM)
         {
-            /*if (!ModelState.IsValid)
-            {
-                return View(group);
-            }
-
-            _context.Add(group);
-            return RedirectToAction("Index");*/
-
             if(ModelState.IsValid)
             {
                 var group = new GroupModel

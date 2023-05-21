@@ -19,16 +19,28 @@ namespace AgendaWebApp.Controllers
 
         public IActionResult Index()
         {
-            // This is returning the list of the items in the TodoItems table.
-            IEnumerable<TodoItemModel> items = _context.GetAllByUser();
-            return View(items);
+            if (!User.Identity.IsAuthenticated)
+            {
+                return View("Views/GroupModel/NoLoginView.cshtml");
+            }
+            else
+            {
+                IEnumerable<TodoItemModel> items = _context.GetAllByUser();
+                return View(items);
+            }
         }
 
         public IActionResult AllTasks()
         {
-            // This is returning the list of the items in the TodoItems table.
-            IEnumerable<TodoItemModel> items = _context.GetAll();
-            return View(items);
+            if (!User.Identity.IsAuthenticated)
+            {
+                return View("Views/GroupModel/NoLoginView.cshtml");
+            }
+            else
+            {
+                IEnumerable<TodoItemModel> items = _context.GetAll();
+                return View(items);
+            }
         }
 
         // Defaults to 0 so that if no group id is provided it uses the "0" group id which no group has

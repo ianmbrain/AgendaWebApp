@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<AgendaWebApp.ViewModel.UserViewModel>
 
 <div class="text-center">
-    <h1 class="display-4">Task Tracker</h1>
-    <p>These are the other users of the application. Use this application to complete your own to do items and see how well others are doing.</p>
+    <h4 class="display-4">Task Tracker</h4>
+    <h5>These are the other users of the application. Use this application to complete your own to do items and see how well others are doing.</h5>
 </div>
 
 @foreach(var item in Model)
@@ -23,7 +23,7 @@
                 </div>
                 <div class="card" style="width: 16rem; float: left; margin-right: 2rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Finsihed Tasks: @item.FinishedTaskCount</h5>
+                        <h5 class="card-title">Finished Tasks: @item.FinishedTaskCount</h5>
                         <p class="card-text"><span class="badge rounded-pill bg-success badge-lg">  </span> <strong>Important Tasks: @item.FinishedImportantTasks</strong></p>
                         <p class="card-text"><span class="badge rounded-pill bg-warning badge-lg">  </span> <strong>Relevant Tasks: @item.FinishedRelevantTasks</strong></p>
                         <p class="card-text"><span class="badge rounded-pill bg-danger badge-lg">  </span> <strong>Minor Tasks: @item.FinishedMinorTasks</strong></p>
