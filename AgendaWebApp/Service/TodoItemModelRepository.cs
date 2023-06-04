@@ -1,7 +1,6 @@
 ﻿using AgendaWebApp.Data;
 using AgendaWebApp.Data.Enum;
 using AgendaWebApp.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgendaWebApp.Service
@@ -14,7 +13,6 @@ namespace AgendaWebApp.Service
 
         public TodoItemModelRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)  
         {
-            // Uses the database tables from the ApplicationDbContext class.
             _context = context;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -37,12 +35,6 @@ namespace AgendaWebApp.Service
             return Save();
         }
 
-        /// <summary>
-        /// Returns a list of all the tasks in the database
-        /// Task is used to return an object.
-        /// ToListAsync is needed from the async Task combo.
-        /// </summary>
-        /// <returns>List of all the tasks in the database</returns>
         public ICollection<TodoItemModel> GetAll()
         {
             var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
