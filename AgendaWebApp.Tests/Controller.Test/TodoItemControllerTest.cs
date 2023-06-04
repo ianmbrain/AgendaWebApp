@@ -1,22 +1,11 @@
 ﻿using AgendaWebApp.Controllers;
-using AgendaWebApp.Data;
-using AgendaWebApp.Data.Enum;
 using AgendaWebApp.Models;
 using AgendaWebApp.Service;
 using AgendaWebApp.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Build.Framework;
-using Microsoft.CodeAnalysis.Elfie.Model.Structures;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Net.Http;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AgendaWebApp.Tests.Controller.Test
 {
