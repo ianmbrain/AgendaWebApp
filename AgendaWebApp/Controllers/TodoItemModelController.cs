@@ -54,7 +54,7 @@ namespace AgendaWebApp.Controllers
         public IActionResult Details(int id)
         {
             // Include "Include(a => a.GroupModelId)." after TodoItems if using join
-            TodoItemModel item = _context.GetById(id);
+            TodoItemModel item = _context.GetByIdNoTracking(id);
             return View(item);
         }
 
@@ -134,7 +134,7 @@ namespace AgendaWebApp.Controllers
         /// <returns> View containing the item values preloaded </returns>
         public IActionResult Edit(int id)
         {
-            var item = _context.GetById(id);
+            var item = _context.GetByIdNoTracking(id);
 
             if(item == null)
             {

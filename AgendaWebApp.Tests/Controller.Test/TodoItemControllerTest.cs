@@ -74,7 +74,7 @@ namespace AgendaWebApp.Tests.Controller.Test
         {
             // Arrange
             var mockRepo = new Mock<ITodoItemModelRepository>();
-            mockRepo.Setup(repo => repo.GetById(1))
+            mockRepo.Setup(repo => repo.GetByIdNoTracking(1))
                 .Returns(GetTodoItems().ElementAt(0));
             var controller = new TodoItemModelController(mockRepo.Object);
             // Act
@@ -146,7 +146,7 @@ namespace AgendaWebApp.Tests.Controller.Test
         {
             // Arrange
             var mockRepo = new Mock<ITodoItemModelRepository>();
-            mockRepo.Setup(repo => repo.GetById(1))
+            mockRepo.Setup(repo => repo.GetByIdNoTracking(1))
                 .Returns(GetTodoItems().ElementAt(0));
             var controller = new TodoItemModelController(mockRepo.Object);
 
