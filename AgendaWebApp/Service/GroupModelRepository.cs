@@ -12,7 +12,6 @@ namespace AgendaWebApp.Service
 
         public GroupModelRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
-            // Uses the database tables from the ApplicationDbContext class.
             _context = context;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -23,11 +22,6 @@ namespace AgendaWebApp.Service
             return Save();
         }
 
-        public bool Delete(GroupModel item)
-        {
-            throw new NotImplementedException();
-        }
-
         public ICollection<GroupModel> GetAll()
         {
             var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
@@ -35,26 +29,10 @@ namespace AgendaWebApp.Service
             return userGroups.ToList();
         }
 
-        public GroupModel GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public GroupModel GetByIdNoTracking(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-
         public bool Save()
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
-        }
-
-        public bool Update(GroupModel item)
-        {
-            throw new NotImplementedException();
         }
     }
 }
