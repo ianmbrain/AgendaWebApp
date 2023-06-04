@@ -35,7 +35,7 @@ namespace AgendaWebApp.Tests.Controller.Test
             Assert.Equal("Views/GroupModel/NoLoginView.cshtml", viewResult.ViewName);
         }
 
-            [Fact]
+        [Fact]
         public void GetAll_ReturnsAViewResult_ListOfTasks()
         {
             // Arrange
@@ -230,8 +230,8 @@ namespace AgendaWebApp.Tests.Controller.Test
 
         private List<TodoItemModel> GetTodoItems()
         {
-            var sessions = new List<TodoItemModel>();
-            sessions.Add(new TodoItemModel()
+            var tasks = new List<TodoItemModel>();
+            tasks.Add(new TodoItemModel()
             {
                 Id = 1,
                 Name = "Name1",
@@ -240,7 +240,7 @@ namespace AgendaWebApp.Tests.Controller.Test
                 CreationDate = new DateTime(2023, 5, 1),
                 GroupModelId = 1
             });
-            sessions.Add(new TodoItemModel()
+            tasks.Add(new TodoItemModel()
             {
                 Id = 2,
                 Name = "Name2",
@@ -249,7 +249,7 @@ namespace AgendaWebApp.Tests.Controller.Test
                 CreationDate = new DateTime(2023, 5, 1),
                 GroupModelId = 1
             });
-            return sessions;
+            return tasks;
         }
 
         private CreateTodoItemViewModel CreateViewModel()
